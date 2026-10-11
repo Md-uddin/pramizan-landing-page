@@ -3,6 +3,10 @@ import { Header } from './components/Header'
 import { SystemGraph } from './components/SystemGraph'
 import { Reveal, rise, stagger, viewport } from './components/Reveal'
 import { ArrowDown, ArrowUp, ArrowUpRight, CubeIcon, DevicesIcon, FlowIcon } from './components/Icons'
+import { Wordmark } from './components/Logo'
+import { Magnetic } from './components/Magnetic'
+import { PointerEffects } from './components/PointerEffects'
+import { DirectLineVisual, FitVisual } from './components/PrincipleVisuals'
 
 const capabilities = [
   {
@@ -23,10 +27,10 @@ const capabilities = [
 ]
 
 const principles = [
-  ['A direct working relationship', 'Communicate with the people doing the work, so questions and decisions stay close to implementation.'],
-  ['Clarity from the outset', 'Define priorities, scope, and responsibilities together, with a shared understanding of what we are building.'],
-  ['Progress you can review', 'Make room for regular reviews and feedback, keeping you involved as the solution takes shape.'],
-  ['Engineering that fits', 'Develop with your existing product and systems in mind, considering how the new work connects with what is already there.'],
+  { title: 'A direct working relationship', body: 'Communicate with the people doing the work, so questions and decisions stay close to implementation.', visual: <DirectLineVisual /> },
+  { title: 'Clarity from the outset', body: 'Define priorities, scope, and responsibilities together, with a shared understanding of what we are building.' },
+  { title: 'Progress you can review', body: 'Make room for regular reviews and feedback, keeping you involved as the solution takes shape.' },
+  { title: 'Engineering that fits', body: 'Develop with your existing product and systems in mind, considering how the new work connects with what is already there.', visual: <FitVisual /> },
 ]
 
 const steps = [
@@ -39,6 +43,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <a className="skip-link" href="#main">Skip to content</a>
+      <PointerEffects />
       <Header />
 
       <main id="main">
@@ -50,10 +55,12 @@ export default function App() {
             </h1>
             <p className="hero-intro">We help you build AI-enabled products and integrate AI into existing software—with specialist engineering, clear communication, and ownership of delivery.</p>
             <div className="hero-actions">
-              <a className="button" href="#contact">
-                <span>Discuss your project</span>
-                <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
-              </a>
+              <Magnetic>
+                <a className="button" href="#contact">
+                  <span>Discuss your project</span>
+                  <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
+                </a>
+              </Magnetic>
               <a className="text-link text-link--down" href="#capabilities"><span>Explore our capabilities</span><ArrowDown /></a>
             </div>
           </div>
@@ -76,9 +83,9 @@ export default function App() {
             <Reveal as="h2"><span id="capabilities-title">Practical AI.<br /><em>Thoughtful engineering.</em></span></Reveal>
             <Reveal as="p" className="section-intro">From a defined part of an existing product to a new application, we bring software development and applied AI together around what your business needs.</Reveal>
           </div>
-          <motion.ul className="capability-list" role="list" variants={stagger} initial="hidden" whileInView="shown" viewport={viewport}>
+          <motion.ul className="capability-list" role="list" data-spotlight-group variants={stagger} initial="hidden" whileInView="shown" viewport={viewport}>
             {capabilities.map((c) => (
-              <motion.li className="capability" key={c.title} variants={rise}>
+              <motion.li className="capability" key={c.title} variants={rise} data-spotlight>
                 <div className="capability-icon">{c.icon}</div>
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
@@ -89,16 +96,21 @@ export default function App() {
 
         <section className="relationship" id="how-we-work" aria-labelledby="relationship-title">
           <div className="wrap relationship-inner">
-            <motion.div className="relationship-copy" variants={stagger} initial="hidden" whileInView="shown" viewport={viewport}>
+            <motion.div className="relationship-head" variants={stagger} initial="hidden" whileInView="shown" viewport={viewport}>
               <motion.h2 id="relationship-title" variants={rise}>Specialist capability.<br />Shared context.<br /><em>Clear ownership.</em></motion.h2>
-              <motion.p variants={rise}>We work as an extension of your team: close enough to understand the wider product, with responsibility for an agreed scope of engineering work.</motion.p>
-              <motion.p variants={rise}>You gain specialist capability without needing to assemble and manage a dedicated AI engineering team. Together, we keep the work connected to your priorities and make technical decisions with the broader product in mind. The starting point is the work you need delivered, whether your team needs focused support or a broader engineering contribution.</motion.p>
+              <div className="relationship-copy">
+                <motion.p variants={rise}>We work as an extension of your team: close enough to understand the wider product, with responsibility for an agreed scope of engineering work.</motion.p>
+                <motion.p variants={rise}>You gain specialist capability without needing to assemble and manage a dedicated AI engineering team. Together, we keep the work connected to your priorities and make technical decisions with the broader product in mind. The starting point is the work you need delivered, whether your team needs focused support or a broader engineering contribution.</motion.p>
+              </div>
             </motion.div>
-            <motion.ul className="principles" role="list" variants={stagger} initial="hidden" whileInView="shown" viewport={viewport}>
-              {principles.map(([title, body]) => (
-                <motion.li className="principle" key={title} variants={rise}>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
+            <motion.ul className="principles" role="list" data-spotlight-group variants={stagger} initial="hidden" whileInView="shown" viewport={viewport}>
+              {principles.map((p) => (
+                <motion.li className="principle" key={p.title} variants={rise} data-spotlight>
+                  <div className="principle-text">
+                    <h3>{p.title}</h3>
+                    <p>{p.body}</p>
+                  </div>
+                  {p.visual && <div className="principle-visual">{p.visual}</div>}
                 </motion.li>
               ))}
             </motion.ul>
@@ -130,18 +142,16 @@ export default function App() {
 
         <section className="contact wrap" id="contact" aria-labelledby="contact-title">
           <Reveal className="contact-shell">
-            <div className="contact-panel">
+            <div className="contact-panel" data-spotlight-group data-spotlight>
               <div className="contact-copy">
                 <h2 id="contact-title">Let’s talk about<br /><em>what you’re building.</em></h2>
                 <p>Tell us about your product, the challenge you’re solving, or where you want to introduce AI.</p>
               </div>
               <div className="contact-action">
-                {/* Replace with: <a className="email-button" href="mailto:YOUR_REAL_EMAIL">…</a> — see README */}
-                <button className="email-button" type="button" disabled aria-describedby="email-status">
-                  <span>[Contact Email]</span>
+                <a className="email-button" href="mailto:support@pramizan.com">
+                  <span>support@pramizan.com</span>
                   <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
-                </button>
-                <p id="email-status">Preview only — contact email to be added.</p>
+                </a>
               </div>
             </div>
           </Reveal>
@@ -150,7 +160,7 @@ export default function App() {
 
       <footer className="footer">
         <div className="wrap footer-row">
-          <span className="wordmark"><span className="brand-mark" aria-hidden="true" /><span className="wordmark-name"><strong>PRAMIZAN</strong> PRIVATE LIMITED</span></span>
+          <span className="wordmark"><Wordmark /></span>
           <p>AI product engineering. Built together.</p>
           <a className="text-link text-link--up" href="#top"><span>Back to top</span><ArrowUp /></a>
         </div>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react'
 import { ArrowUpRight } from './Icons'
+import { Wordmark } from './Logo'
+import { Magnetic } from './Magnetic'
 
 const links = [
   { href: '#capabilities', label: 'Capabilities' },
@@ -35,16 +37,19 @@ export function Header() {
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}${open ? ' menu-open' : ''}`}>
       <div className="header-bar wrap">
         <a className="wordmark" href="#top" aria-label="PRAMIZAN PRIVATE LIMITED, home">
-          <span className="brand-mark" aria-hidden="true" />
-          <span className="wordmark-name"><strong>PRAMIZAN</strong> PRIVATE LIMITED</span>
+          <Wordmark />
         </a>
         <nav className="nav" aria-label="Main navigation">
           {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
         </nav>
-        <a className="button button--compact header-cta" href="#contact">
-          <span>Discuss your project</span>
-          <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
-        </a>
+        <span className="header-cta">
+          <Magnetic strength={0.18} max={6}>
+            <a className="button button--compact" href="#contact">
+              <span>Discuss your project</span>
+              <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
+            </a>
+          </Magnetic>
+        </span>
         <button
           className="menu-toggle"
           type="button"

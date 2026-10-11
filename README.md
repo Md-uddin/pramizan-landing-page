@@ -34,21 +34,11 @@ npm run preview    # serve the production build locally
 `PRAMIZAN PRIVATE LIMITED` appears in `index.html` (title and metadata),
 `Header.tsx` and the footer in `App.tsx`. Use Find and Replace across the project.
 
-## Activate the email action
+## Contact email
 
-The preview deliberately has a disabled button because no email address was
-provided. In `src/App.tsx`, find `className="contact-action"` and replace the
-`<button>` and the "Preview only" paragraph with:
-
-```tsx
-<a className="email-button" href="mailto:YOUR_REAL_EMAIL">
-  <span>YOUR_REAL_EMAIL</span>
-  <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
-</a>
-```
-
-Do not leave `YOUR_REAL_EMAIL` in the finished page. An email link opens the
-visitor's configured email app; no form or booking service is connected.
+The contact panel links to `support@pramizan.com` (in `src/App.tsx`, search for
+`mailto:`). An email link opens the visitor's own email app; no form or booking
+service is connected.
 
 ## Change the wording
 
@@ -57,28 +47,35 @@ at the top, and the JSX below. Keep the section IDs (`capabilities`,
 `how-we-work`, `process`, `contact`) so the navigation links keep working.
 Do not add unverified client claims or results.
 
-## Change colours and sizes
+## Brand colours
 
-The `:root` block at the top of `src/styles.css` defines the main colours:
+The official palette is defined once at the top of `src/styles.css`. Every other
+colour on the site derives from these variables, so change them there only.
 
-| Variable | Current value | Purpose |
+| Variable | Value | Use |
 | --- | --- | --- |
-| `--paper` | `#f7f6f2` | Warm page background |
-| `--ink` | `#1c1f1b` | Main text |
-| `--muted` | `#565b54` | Paragraph text |
-| `--soft` | `#646a62` | Lightest allowed text (captions) |
-| `--blue` | `#2b4683` | Main accent and buttons |
-| `--night` | `#131a2c` | Dark "How we work" section |
-| `--line` | 12% ink | Subtle borders |
+| `--brand-navy` | `#141A2E` | Text, dark section, logo pillar |
+| `--brand-blue` | `#2F4BFF` | Accent, buttons, contact panel, logo arc |
+| `--brand-paper` | `#FAFAF8` | Page background |
 
-Animation curves live in the same block. The hero graph's colours are the
-`.sg-*` rules in `styles.css`; its geometry, speed and cursor response are the
-constants at the top of `SystemGraph.tsx`. Every animation respects the
-visitor's reduced-motion setting.
+Buttons use `--button-bg` (navy) with a `--button-icon-bg` (electric blue) disc.
+
+Each has an `-rgb` twin (e.g. `--brand-blue-rgb`) for transparent tints:
+`rgb(var(--brand-blue-rgb) / .2)`. Semantic tokens such as `--ink`, `--muted`,
+`--on-night` and `--on-blue` sit below them and are contrast-checked (WCAG AA).
+
+The official logo SVG lives in `src/components/Logo.tsx`. Its colours come from
+the `.logo-pillar` and `.logo-arc` CSS rules, so it follows the palette.
+
+## Pointer effects
+
+`src/components/PointerEffects.tsx` adds a soft light that trails the cursor and
+the "spotlight" borders in the How we work grid, capability rows and contact
+panel. `src/components/Magnetic.tsx` pulls the main buttons toward the cursor.
+All of them run for mouse users only and switch off with reduced motion.
 
 ## Before launch
 
-- Replace the contact placeholder.
 - Test navigation links, keyboard focus and the skip link.
 - Check widths down to 320px for overflow.
 - Remove `<meta name="robots" content="noindex, nofollow">` from `index.html`
