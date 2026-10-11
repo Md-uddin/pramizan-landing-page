@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-11T22:41:03.304Z",
+        "reason": "Claude triage: flagged containers (capability-list rows, full-bleed relationship band, contact-panel) all have 32-88px computed padding; detector misreads"
+      },
+      {
+        "rule": "icon-tile-stack",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-11T22:42:47.096Z",
+        "reason": "Claude triage: capability icons sit beside the h3 at every breakpoint (own grid column on desktop, inline row on mobile); verified in browser at 1440 and 375"
+      }
+    ]
+  }
+}
