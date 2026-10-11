@@ -148,8 +148,8 @@ export default function App() {
                 <p>Tell us about your product, the challenge you’re solving, or where you want to introduce AI.</p>
               </div>
               <div className="contact-action">
-                <a className="email-button" href="mailto:support@pramizan.com">
-                  <span>support@pramizan.com</span>
+                <a className="email-button" href="mailto:info@pramizan.com">
+                  <span>info@pramizan.com</span>
                   <span className="button-icon" aria-hidden="true"><ArrowUpRight /></span>
                 </a>
               </div>

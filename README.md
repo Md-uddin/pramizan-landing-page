@@ -36,7 +36,7 @@ npm run preview    # serve the production build locally
 
 ## Contact email
 
-The contact panel links to `support@pramizan.com` (in `src/App.tsx`, search for
+The contact panel links to `info@pramizan.com` (in `src/App.tsx`, search for
 `mailto:`). An email link opens the visitor's own email app; no form or booking
 service is connected.
 
