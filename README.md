@@ -1,4 +1,4 @@
-# PRAMIZAN PRIVATE LIMITED — website source
+# Pramizan — website source
 
 A single-page marketing site built with React, TypeScript, Vite and
 [Motion](https://motion.dev) (formerly Framer Motion). Fonts (Schibsted Grotesk
@@ -31,7 +31,7 @@ npm run preview    # serve the production build locally
 
 ## Set the company name
 
-`PRAMIZAN PRIVATE LIMITED` appears in `index.html` (title and metadata),
+`Pramizan` appears in `index.html` (title and metadata),
 `Header.tsx` and the footer in `App.tsx`. Use Find and Replace across the project.
 
 ## Contact email

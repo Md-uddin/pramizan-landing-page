@@ -12,7 +12,7 @@ export function Wordmark() {
   return (
     <>
       <Logo />
-      <span className="wordmark-name"><strong>PRAMIZAN</strong> PRIVATE LIMITED</span>
+      <span className="wordmark-name"><strong>PRAMIZAN</strong></span>
     </>
   )
 }

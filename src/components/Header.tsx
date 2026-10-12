@@ -36,7 +36,7 @@ export function Header() {
   return (
     <header className={`site-header${scrolled ? ' is-scrolled' : ''}${open ? ' menu-open' : ''}`}>
       <div className="header-bar wrap">
-        <a className="wordmark" href="#top" aria-label="PRAMIZAN PRIVATE LIMITED, home">
+        <a className="wordmark" href="#top" aria-label="Pramizan, home">
           <Wordmark />
         </a>
         <nav className="nav" aria-label="Main navigation">
